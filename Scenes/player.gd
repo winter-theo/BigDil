@@ -36,9 +36,10 @@ func _process(delta : float) -> void:
 		direction = Vector2.ZERO
 		$AnimatedSprite2D.flip_h = flip
 		$AnimatedSprite2D.play(last_dir)
-		
+
 func _physics_process(delta : float) -> void:
-	if movement_validation.validate_movement(direction * grid_size) and can_move and direction != Vector2.ZERO:
+	# AJOUT TOUR-PAR-TOUR : on ne bouge que si c'est le tour du joueur.
+	if movement_validation.validate_movement(direction * grid_size) and can_move and direction != Vector2.ZERO and global.is_player_turn:
 		can_move = false
 		movement_tween.run(self, global_position + direction * grid_size)
 		movement_tween.tween.finished.connect(on_movement_tween_finished)
@@ -46,25 +47,29 @@ func _physics_process(delta : float) -> void:
 		self.modulate.a = 0.5
 	elif global.can_be_damaged == true:
 		self.modulate.a = 1.0
-	
+
+	# Bloc legacy : dégâts pris au contact via l'Area2D du joueur.
+	# (Actuellement non fonctionnel car la shape de l'Area2D du Bill est vide.
+	# Le nouveau système d'IA attaque directement via attack_player().)
 	if in_range == true && global.TurnCounter % 2 != 0 && buffer == true:
 		global.has_taken_damage = true
 		global.can_be_damaged = true
 		global.damageAmount = 1
 		buffer = false
 		global.is_frozen = true
-		
+
 
 func on_movement_tween_finished() -> void:
 	can_move = true
 	global.Billpos = self.position
-	global.TurnCounter = global.TurnCounter + 1
+	# AJOUT TOUR-PAR-TOUR : consume_turn notifie le TurnManager qui déclenche
+	# le tour des ennemis. (Remplace l'ancien `TurnCounter = TurnCounter + 1`.)
+	global.consume_turn()
 	buffer = true
-	
-		
-		
-	
-	## Animations
+
+
+
+		## Animations
 func playAnim(dir):
 		if dir.x == 1:
 			$AnimatedSprite2D.flip_h = true
@@ -78,14 +83,9 @@ func playAnim(dir):
 			$AnimatedSprite2D.play("walk_down")
 		if dir.y == 0 && dir.x == 0:
 			$AnimatedSprite2D.stop()
-		
+
 func player():
 	pass
-	
-
-
-
-
 
 
 

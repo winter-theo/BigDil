@@ -8,7 +8,7 @@ func _ready():
 	if global.has_been_obtained[global.CurrentSlot] == true && global.LastPicked == true:
 		$TextureRect2.set_texture(global.itemSprite[global.CurrentSlot])
 		$TextureRect2/Label.set_text("x"+str(global.quantity[global.CurrentSlot]))
-		
+
 	if global.quantity[global.CurrentSlot] == 0 && global.has_been_obtained[global.CurrentSlot] == true:
 		global.has_been_obtained[global.CurrentSlot] = false
 		for i in 2:
@@ -17,25 +17,13 @@ func _ready():
 			if global.quantity[i] > 0:
 				if i == global.CurrentSlot:
 					i = i + 1
-				global.CurrentSlot = i 
+				global.CurrentSlot = i
 				$TextureRect2.set_texture(global.itemSprite[global.CurrentSlot])
 				$TextureRect2/Label.set_text("x"+str(global.quantity[global.CurrentSlot]))
 				break
-			
-			
-					
-				
-			
 
-		
 	global.LastPicked = false
-	
 
-		
-	
-		
-	
-		
 	if Input.is_action_just_pressed("select"):
 		var FirstCheck = true
 		for i in 2:
@@ -44,23 +32,20 @@ func _ready():
 			if global.quantity[i] > 0:
 				if i == global.CurrentSlot:
 					i = i + 1
-				global.CurrentSlot = i 
+				global.CurrentSlot = i
 				$TextureRect2.set_texture(global.itemSprite[global.CurrentSlot])
 				$TextureRect2/Label.set_text("x"+str(global.quantity[global.CurrentSlot]))
 				break
-			
-		
-		
-	if global.CurrentSlot == 0 && global.quantity[0] >= 1 && Input.is_action_pressed("ui_cancel"):
+
+	# AJOUT TOUR-PAR-TOUR : on ne peut poser une bombe qu'à son tour.
+	if global.CurrentSlot == 0 && global.quantity[0] >= 1 && Input.is_action_pressed("ui_cancel") && global.is_player_turn:
 		global.loading_scene = true
 		global.scene_name = "bomb_placed"
 		global.quantity[0] -= 1
 		$TextureRect2/Label.set_text("x"+str(global.quantity[0]))
-		global.TurnCounter = global.TurnCounter + 1
-				
-		
-		
-		
+		# Remplace l'ancien `TurnCounter = TurnCounter + 1` : notifie le
+		# TurnManager pour qu'il enchaîne les tours ennemis.
+		global.consume_turn()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

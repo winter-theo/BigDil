@@ -1,0 +1,86 @@
+[gd_scene load_steps=12 format=3 uid="uid://b8cafardx7eb01"]
+
+[ext_resource type="Script" path="res://Scenes/cafard.gd" id="1_cafard"]
+[ext_resource type="Script" path="res://Scenes/MovementTween.gd" id="2_tween"]
+[ext_resource type="Script" path="res://Scenes/RayCast2D.gd" id="3_raycast"]
+[ext_resource type="Texture2D" path="res://Assets/Entities/Enemies/cafard.png" id="4_cafard_sheet"]
+[ext_resource type="AudioStream" uid="uid://dsywae7apb2lt" path="res://OST/SE/02_dmg.wav" id="5_dmg_sound"]
+
+[sub_resource type="AtlasTexture" id="frame_down_0"]
+atlas = ExtResource("4_cafard_sheet")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="frame_down_1"]
+atlas = ExtResource("4_cafard_sheet")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="frame_side_0"]
+atlas = ExtResource("4_cafard_sheet")
+region = Rect2(16, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="frame_side_1"]
+atlas = ExtResource("4_cafard_sheet")
+region = Rect2(16, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="frame_up_0"]
+atlas = ExtResource("4_cafard_sheet")
+region = Rect2(16, 64, 16, 16)
+
+[sub_resource type="AtlasTexture" id="frame_up_1"]
+atlas = ExtResource("4_cafard_sheet")
+region = Rect2(16, 80, 16, 16)
+
+[sub_resource type="SpriteFrames" id="cafard_frames"]
+animations = [{
+"frames": [{"duration": 1.0, "texture": SubResource("frame_down_0")}, {"duration": 1.0, "texture": SubResource("frame_down_1")}],
+"loop": true,
+"name": &"walk_down",
+"speed": 3.0
+}, {
+"frames": [{"duration": 1.0, "texture": SubResource("frame_side_0")}, {"duration": 1.0, "texture": SubResource("frame_side_1")}],
+"loop": true,
+"name": &"walk_side",
+"speed": 3.0
+}, {
+"frames": [{"duration": 1.0, "texture": SubResource("frame_up_0")}, {"duration": 1.0, "texture": SubResource("frame_up_1")}],
+"loop": true,
+"name": &"walk_up",
+"speed": 3.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cafard"]
+size = Vector2(16, 16)
+
+[node name="Cafard" type="CharacterBody2D"]
+script = ExtResource("1_cafard")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("cafard_frames")
+animation = &"walk_down"
+autoplay = "walk_down"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_cafard")
+
+[node name="MovementTween" type="Node" parent="."]
+script = ExtResource("2_tween")
+move_time = 0.2
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+script = ExtResource("3_raycast")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -4.0
+offset_top = -14.0
+offset_right = 28.0
+offset_bottom = -2.0
+theme_override_font_sizes/font_size = 8
+theme_override_colors/font_color = Color(0.878431, 0.972549, 0.815686, 1)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_dmg_sound")
+pitch_scale = 1.2
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.48
+one_shot = true

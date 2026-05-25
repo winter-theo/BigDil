@@ -1,12 +1,13 @@
-[gd_scene load_steps=11 format=3 uid="uid://dofeh45u3suw0"]
+[gd_scene format=3 uid="uid://dofeh45u3suw0"]
 
-[ext_resource type="Script" path="res://Scripts/overworld_management.gd" id="1_8nxlv"]
+[ext_resource type="Script" uid="uid://5l3p4sdcjhq7" path="res://Scripts/overworld_management.gd" id="1_8nxlv"]
 [ext_resource type="PackedScene" uid="uid://cs6v3tkaxp7eb" path="res://Scenes/bill.tscn" id="1_gv5t5"]
 [ext_resource type="Texture2D" uid="uid://b7ae85g14mhrg" path="res://Assets/Tilesets/collisions.png" id="1_mmyif"]
 [ext_resource type="Texture2D" uid="uid://cg832fuxmwi6b" path="res://Assets/Tilesets/spaceship.png" id="2_ktwms"]
 [ext_resource type="PackedScene" uid="uid://dp2ksq46igaml" path="res://Scenes/placeholder.tscn" id="5_3q8to"]
 [ext_resource type="PackedScene" uid="uid://c5v1gyj645utw" path="res://Scenes/bomb.tscn" id="5_rd03f"]
 [ext_resource type="PackedScene" uid="uid://cp1oxdiwwrbdj" path="res://Scenes/placeholder_enemy.tscn" id="7_ar1sb"]
+[ext_resource type="PackedScene" uid="uid://bmcl8sqolxf41" path="res://Scenes/cafard.tscn" id="8_2ngsa"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hqxwm"]
 texture = ExtResource("1_mmyif")
@@ -76,10 +77,10 @@ physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_hqxwm")
 sources/1 = SubResource("TileSetAtlasSource_7elph")
 
-[node name="Overworld" type="Node2D"]
+[node name="Overworld" type="Node2D" unique_id=1279085274]
 script = ExtResource("1_8nxlv")
 
-[node name="TileMap" type="TileMap" parent="."]
+[node name="TileMap" type="TileMap" parent="." unique_id=1867920702]
 tile_set = SubResource("TileSet_dxcpu")
 format = 2
 layer_0/name = "collisions"
@@ -89,14 +90,17 @@ layer_1/tile_data = PackedInt32Array(-196611, 1, 3, -131075, 1, 4, -65539, 1, 5,
 layer_2/name = "above_ground"
 layer_2/z_index = 1
 
-[node name="Bomb" parent="." instance=ExtResource("5_rd03f")]
+[node name="Bomb" parent="." unique_id=449457599 instance=ExtResource("5_rd03f")]
 position = Vector2(-48, 16)
 
-[node name="PLACEHOLDER" parent="." instance=ExtResource("5_3q8to")]
+[node name="PLACEHOLDER" parent="." unique_id=1077364245 instance=ExtResource("5_3q8to")]
 position = Vector2(-80, 16)
 
-[node name="Bill" parent="." instance=ExtResource("1_gv5t5")]
+[node name="Bill" parent="." unique_id=542849042 instance=ExtResource("1_gv5t5")]
 position = Vector2(-40, -8)
 
-[node name="placeholder" parent="." instance=ExtResource("7_ar1sb")]
+[node name="placeholder" parent="." unique_id=1890784422 instance=ExtResource("7_ar1sb")]
 position = Vector2(-104, 16)
+
+[node name="Cafard" parent="." unique_id=1449493787 instance=ExtResource("8_2ngsa")]
+position = Vector2(40, 40)
