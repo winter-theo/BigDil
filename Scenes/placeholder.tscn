@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://dp2ksq46igaml"]
+
+[ext_resource type="Script" path="res://Scenes/placeholder.gd" id="1_jubih"]
+[ext_resource type="Texture2D" uid="uid://dikdv3dxbooaw" path="res://Assets/UI/life_2.png" id="1_r0hqx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_idr0w"]
+size = Vector2(16, 16)
+
+[node name="PLACEHOLDER" type="Area2D"]
+script = ExtResource("1_jubih")
+
+[node name="Placeholder" type="Sprite2D" parent="."]
+position = Vector2(8, 8)
+texture = ExtResource("1_r0hqx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(8, 8)
+shape = SubResource("RectangleShape2D_idr0w")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://c5v1gyj645utw"]
+
+[ext_resource type="Texture2D" uid="uid://qautjo4kqoxi" path="res://Assets/UI/bomb.png" id="1_524af"]
+[ext_resource type="Script" path="res://Scenes/bomb.gd" id="1_w1wum"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d1b4o"]
+size = Vector2(16, 16)
+
+[node name="Bomb" type="Area2D"]
+script = ExtResource("1_w1wum")
+
+[node name="Bomb" type="Sprite2D" parent="."]
+position = Vector2(8, 8)
+texture = ExtResource("1_524af")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(8, 8)
+shape = SubResource("RectangleShape2D_d1b4o")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

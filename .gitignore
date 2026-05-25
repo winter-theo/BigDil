@@ -1,0 +1,35 @@
+# Godot 4+ specific ignores
+.godot/
+.import/
+
+# Exports / builds
+export/
+exports/
+build/
+builds/
+*.exe
+*.pck
+*.zip
+*.apk
+*.aab
+*.dmg
+
+# Godot export presets (contiennent souvent des credentials/keystores)
+# Décommente la ligne suivante si tu veux les garder privés :
+# export_presets.cfg
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Éditeurs / IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs et temporaires
+*.log
+*.tmp

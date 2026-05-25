@@ -1,0 +1,61 @@
+[gd_scene load_steps=5 format=3 uid="uid://dcxqnda6faw3b"]
+
+[ext_resource type="FontFile" uid="uid://cc1gvotsuwc82" path="res://Assets/UI/Early GameBoy.ttf" id="1_tcymo"]
+[ext_resource type="Script" path="res://Scripts/game_over.gd" id="2_n8cjf"]
+[ext_resource type="Texture2D" uid="uid://17d7lcus7ubk" path="res://Assets/UI/game_over.png" id="3_66kf4"]
+
+[sub_resource type="Theme" id="Theme_cm762"]
+default_font = ExtResource("1_tcymo")
+
+[node name="game_over" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_cm762")
+script = ExtResource("2_n8cjf")
+
+[node name="GameOver" type="Sprite2D" parent="."]
+position = Vector2(76, 70.4211)
+scale = Vector2(0.509695, 0.496336)
+texture = ExtResource("3_66kf4")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ColorRect" type="ColorRect" parent="TextureRect"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 64.0
+offset_right = 136.0
+offset_bottom = 88.0
+color = Color(1, 1, 1, 0)
+
+[node name="Label" type="Label" parent="TextureRect/ColorRect"]
+layout_mode = 0
+offset_left = -24.0
+offset_top = 48.0
+offset_right = 56.0
+offset_bottom = 71.0
+text = "Retry"
+
+[node name="ColorRect2" type="ColorRect" parent="TextureRect"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 104.0
+offset_right = 136.0
+offset_bottom = 128.0
+color = Color(1, 1, 1, 0)
+
+[node name="Label" type="Label" parent="TextureRect/ColorRect2"]
+layout_mode = 0
+offset_left = 72.0
+offset_top = 8.0
+offset_right = 136.0
+offset_bottom = 31.0
+theme_override_colors/font_color = Color(0.878431, 0.972549, 0.815686, 1)
+text = "quit"

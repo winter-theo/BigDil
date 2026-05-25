@@ -1,0 +1,62 @@
+[gd_scene load_steps=4 format=3 uid="uid://bhwtx2jvhu4a5"]
+
+[ext_resource type="Script" path="res://Scenes/life_bar.gd" id="1_bvqju"]
+[ext_resource type="Texture2D" uid="uid://dg3o1lqsx0mnc" path="res://Assets/UI/life_1.png" id="1_todi3"]
+[ext_resource type="AudioStream" uid="uid://dsywae7apb2lt" path="res://OST/SE/02_dmg.wav" id="3_36mmb"]
+
+[node name="Life_bar" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -24.0
+offset_top = -16.0
+offset_right = -104.0
+offset_bottom = -128.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_bvqju")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = -8.0
+offset_right = 72.0
+offset_bottom = 24.0
+color = Color(1, 1, 1, 0)
+
+[node name="TextureRect" type="TextureRect" parent="ColorRect"]
+layout_mode = 0
+offset_top = 8.0
+offset_right = 16.0
+offset_bottom = 24.0
+texture = ExtResource("1_todi3")
+
+[node name="TextureRect2" type="TextureRect" parent="ColorRect"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 8.0
+offset_right = 32.0
+offset_bottom = 24.0
+texture = ExtResource("1_todi3")
+
+[node name="TextureRect3" type="TextureRect" parent="ColorRect"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 8.0
+offset_right = 56.0
+offset_bottom = 24.0
+texture = ExtResource("1_todi3")
+stretch_mode = 4
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.48
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_36mmb")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

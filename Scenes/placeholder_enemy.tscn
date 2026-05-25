@@ -1,0 +1,44 @@
+[gd_scene load_steps=6 format=3 uid="uid://cp1oxdiwwrbdj"]
+
+[ext_resource type="Script" path="res://Scenes/placeholder_enemy.gd" id="1_b16wg"]
+[ext_resource type="Texture2D" uid="uid://ha6qjeupxcc" path="res://Assets/UI/life_4.png" id="1_dgx28"]
+[ext_resource type="AudioStream" uid="uid://dsywae7apb2lt" path="res://OST/SE/02_dmg.wav" id="3_dnmp5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f3qi7"]
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ejjgo"]
+size = Vector2(32, 32)
+
+[node name="placeholder" type="CharacterBody2D"]
+script = ExtResource("1_b16wg")
+
+[node name="Life4" type="Sprite2D" parent="."]
+position = Vector2(16, 8)
+texture = ExtResource("1_dgx28")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(16, 8)
+shape = SubResource("RectangleShape2D_f3qi7")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 32.0
+offset_right = 64.0
+offset_bottom = 26.0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_dnmp5")
+pitch_scale = 0.88
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.48
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(16, 8)
+shape = SubResource("RectangleShape2D_ejjgo")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
