@@ -8,6 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://c5v1gyj645utw" path="res://Scenes/bomb.tscn" id="5_rd03f"]
 [ext_resource type="PackedScene" uid="uid://cp1oxdiwwrbdj" path="res://Scenes/placeholder_enemy.tscn" id="7_ar1sb"]
 [ext_resource type="PackedScene" uid="uid://bmcl8sqolxf41" path="res://Scenes/cafard.tscn" id="8_2ngsa"]
+[ext_resource type="PackedScene" path="res://Scenes/rat.tscn" id="9_c0h7r"]
+[ext_resource type="PackedScene" path="res://Scenes/moai.tscn" id="10_v1c68"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hqxwm"]
 texture = ExtResource("1_mmyif")
@@ -103,4 +105,10 @@ position = Vector2(-40, -8)
 position = Vector2(-104, 16)
 
 [node name="Cafard" parent="." unique_id=1449493787 instance=ExtResource("8_2ngsa")]
-position = Vector2(40, 40)
+position = Vector2(-149, 15)
+
+[node name="Rat" parent="." unique_id=1166663444 instance=ExtResource("9_c0h7r")]
+position = Vector2(-150, 51)
+
+[node name="Moai" parent="." unique_id=978392613 instance=ExtResource("10_v1c68")]
+position = Vector2(33, 14)

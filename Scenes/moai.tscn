@@ -1,0 +1,88 @@
+[gd_scene load_steps=13 format=3 uid="uid://b8moai7eb03yy2"]
+
+[ext_resource type="Script" path="res://Scenes/moai.gd" id="1_moai"]
+[ext_resource type="Script" path="res://Scenes/MovementTween.gd" id="2_tween"]
+[ext_resource type="Script" path="res://Scenes/RayCast2D.gd" id="3_raycast"]
+[ext_resource type="Texture2D" path="res://Assets/Entities/Enemies/moai.png" id="4_moai_sheet"]
+[ext_resource type="AudioStream" uid="uid://dsywae7apb2lt" path="res://OST/SE/02_dmg.wav" id="5_dmg_sound"]
+
+[sub_resource type="AtlasTexture" id="moai_idle_0"]
+atlas = ExtResource("4_moai_sheet")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="moai_idle_1"]
+atlas = ExtResource("4_moai_sheet")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="moai_idle_2"]
+atlas = ExtResource("4_moai_sheet")
+region = Rect2(0, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="moai_charge_0"]
+atlas = ExtResource("4_moai_sheet")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="moai_charge_1"]
+atlas = ExtResource("4_moai_sheet")
+region = Rect2(48, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="moai_attack"]
+atlas = ExtResource("4_moai_sheet")
+region = Rect2(96, 48, 48, 48)
+
+[sub_resource type="SpriteFrames" id="moai_frames"]
+animations = [{
+"frames": [{"duration": 1.0, "texture": SubResource("moai_idle_0")}, {"duration": 1.0, "texture": SubResource("moai_idle_1")}, {"duration": 1.0, "texture": SubResource("moai_idle_2")}],
+"loop": true,
+"name": &"idle",
+"speed": 2.0
+}, {
+"frames": [{"duration": 1.0, "texture": SubResource("moai_charge_0")}, {"duration": 1.0, "texture": SubResource("moai_charge_1")}],
+"loop": true,
+"name": &"charge",
+"speed": 6.0
+}, {
+"frames": [{"duration": 1.0, "texture": SubResource("moai_attack")}],
+"loop": false,
+"name": &"attack",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_moai"]
+size = Vector2(48, 48)
+
+[node name="Moai" type="CharacterBody2D"]
+script = ExtResource("1_moai")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(8, -8)
+sprite_frames = SubResource("moai_frames")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(8, -8)
+shape = SubResource("RectangleShape2D_moai")
+
+[node name="MovementTween" type="Node" parent="."]
+script = ExtResource("2_tween")
+move_time = 0.3
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+script = ExtResource("3_raycast")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -4.0
+offset_top = -34.0
+offset_right = 28.0
+offset_bottom = -22.0
+theme_override_font_sizes/font_size = 8
+theme_override_colors/font_color = Color(0.878431, 0.972549, 0.815686, 1)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_dmg_sound")
+pitch_scale = 0.5
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.48
+one_shot = true
